@@ -4,7 +4,7 @@ using namespace cv;
 
 
 int main() {
-	//std::cout << "\nHello, World OpenCV!" << std::endl;
+	std::cout << "\nHello, World OpenCV!" << std::endl;
 
 
 	VideoCapture cap(0); // open the default camera
@@ -16,6 +16,8 @@ int main() {
 	namedWindow("edges", 1);
 	for (;;)
 	{
+		std::cout << "TEST" << std::endl;
+
 		Mat frame;
 		cap >> frame; // get a new frame from camera
 		//cvtColor(frame, edges, COLOR_BGR2GRAY);
@@ -25,10 +27,10 @@ int main() {
 		if (waitKey(30) >= 0) break;
 	}
 	// the camera will be deinitialized automatically in VideoCapture destructor
-	//return 0;
-
-
-
+	destroyAllWindows();
+	
+	std::cout << "\n\nReturn to end program" << std::endl;
 	std::cin.ignore();
+	
 	return 0;
 }
