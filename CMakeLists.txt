@@ -24,7 +24,7 @@ include_directories(Revenge "${OpenCL_Main}/include")
 include_directories(Revenge "${Kinect_Main}/inc")
 #include_directories(Revenge "${OpenNI_Main}/Include")
 
-add_executable(Revenge Revenge/HelloKinect/Vanilla/HelloKinectVanillaInfrared.cpp)
+add_executable(Revenge Revenge/HelloKinect/Vanilla/HelloKinectVanillaDepth.cpp)
 #add_executable(Revenge Revenge/HelloKinect/Vanilla/HelloKinectVanilla.cpp)
 #add_executable(Revenge Revenge/HelloKinect/HelloKinectOpenNi.cpp)
 #add_executable(Revenge Revenge/HelloKinect/HelloKinectOpenGl.cpp)
