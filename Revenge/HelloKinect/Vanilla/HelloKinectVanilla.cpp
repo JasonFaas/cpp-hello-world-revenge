@@ -73,14 +73,16 @@ int main() {
 	//hr = pColorFrameReader->AcquireLatestFrame(&pColorFrame);
 	int i = 0;
 	IColorFrame* pColorFrame = NULL;
-	while (i++ < 16) {
+	while (i++ < 100) {
 		pColorFrame = NULL;
 		hr = pColorFrameReader->AcquireLatestFrame(&pColorFrame);
 		std::cout << "HR6." << i << ":\t" << SUCCEEDED(hr) << std::endl;
 
 		SafeRelease(pColorFrame);
+		Sleep(100);
 
 		// TODO Reminder color format may be YUY2 or YUYV
+		//cv::cvtColor( bufferMat, colorMat, CV_YUV2BGR_YUYV );
 	}
 	
 	//hr = pColorFrame->get_RawColorImageFormat(&imageFormat);
