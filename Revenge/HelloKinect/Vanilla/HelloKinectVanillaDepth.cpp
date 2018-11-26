@@ -88,7 +88,7 @@ int main() {
 
 	int maxPixelValue = 0;
 
-	while (++i < 100) {
+	while (++i < 50) {
 		pDepthFrame = NULL;
 		hr = pDepthFrameReader->AcquireLatestFrame(&pDepthFrame);
 		std::cout << "HR6." << i << ":\t" << SUCCEEDED(hr) << std::endl;
@@ -103,10 +103,10 @@ int main() {
 				int straightPixelPoint = 0;
 				for (int k = 0; k < nHeight; k++) {
 					for (int m = 0; m < nWidth; m++) {
-						if (m == 200) {
-							std::cout << "HR9." << i << ":\t" << pixelData[straightPixelPoint] << std::endl;
-						}
-						irMat.at<uchar>(k, m) = pixelData[straightPixelPoint] % 256;
+						//if (m == 200) {
+						//	std::cout << "HR9." << i << ":\t" << pixelData[straightPixelPoint] << std::endl;
+						//}
+						irMat.at<uchar>(k, m) = pixelData[straightPixelPoint] / 20;
 						//hsvMat.at<uchar>(k, m, 0) = pixelData[straightPixelPoint] / 256;
 						//hsvMat.at<uchar>(k, m, 1) = 200;
 						//hsvMat.at<uchar>(k, m, 2) = 200;

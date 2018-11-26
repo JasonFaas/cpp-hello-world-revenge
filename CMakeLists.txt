@@ -13,6 +13,12 @@ set(OpenCL_DIR "${OpenCL_Main}/lib/x86")
 set(Kinect_Main "C:/Program Files/Microsoft SDKs/Kinect/v2.0_1409")
 set(Kinect_DIR "${Kinect_Main}/Lib/x86")
 
+#set(Glew_Main "C:/Users/jason/Desktop/Glew/glew-2.1.0")
+#set(Glew_DIR "${Glew_Main}/lib/Release/Win32")
+
+set(Sdl_Main "C:/Users/jason/Desktop/SDL/SDL2-devel-2.0.9-VC/SDL2-2.0.9")
+set(Sdl_DIR "${Sdl_Main}/lib/x86")
+
 #set(OpenNI_Main "C:/Program Files (x86)/OpenNI2")
 #set(OpenNI_DIR "${OpenNI_Main}/Lib")
 
@@ -22,9 +28,13 @@ find_package( OpenCL REQUIRED )
 include_directories(Revenge "${OpenCV_Main}/build/install/include")
 include_directories(Revenge "${OpenCL_Main}/include")
 include_directories(Revenge "${Kinect_Main}/inc")
+#include_directories(Revenge "${Glew_Main}/include/GL")
+include_directories(Revenge "${Sdl_Main}/include")
 #include_directories(Revenge "${OpenNI_Main}/Include")
 
-add_executable(Revenge Revenge/HelloKinect/Vanilla/HelloKinectVanillaDepth.cpp)
+add_executable(Revenge Revenge/HelloOpenCV/FrameOperations.cpp)
+#add_executable(Revenge Revenge/HelloKinect/3DView/main.cpp)
+#add_executable(Revenge Revenge/HelloKinect/Vanilla/HelloKinectVanillaDepth.cpp)
 #add_executable(Revenge Revenge/HelloKinect/Vanilla/HelloKinectVanilla.cpp)
 #add_executable(Revenge Revenge/HelloKinect/HelloKinectOpenNi.cpp)
 #add_executable(Revenge Revenge/HelloKinect/HelloKinectOpenGl.cpp)
@@ -36,3 +46,5 @@ target_link_libraries (Revenge "${OpenCV_DIR}/opencv_calib3d343.lib" "${OpenCV_D
 target_link_libraries (Revenge "${OpenCL_DIR}/OpenCL.lib")
 target_link_libraries (Revenge "${Kinect_DIR}/Kinect20.Face.lib" "${Kinect_DIR}/Kinect20.Fusion.lib" "${Kinect_DIR}/Kinect20.lib" "${Kinect_DIR}/Kinect20.VisualGestureBuilder.lib")
 #target_link_libraries (Revenge "${OpenNI_DIR}/OpenNI2.lib")
+#target_link_libraries (Revenge "${Glew_DIR}/glew32.lib" "${Glew_DIR}/glew32s.lib")
+target_link_libraries (Revenge "${Sdl_DIR}/SDL2.lib" "${Sdl_DIR}/SDL2main.lib" "${Sdl_DIR}/SDL2test.lib")
