@@ -67,8 +67,13 @@ int main() {
 
 void Dilation(int, void*)
 {
+
 	cv::Mat depthCopy;
 	depthImage.copyTo(depthCopy);
+
+	cv::Rect reverseBorder = cv::Rect(dilation_size, dilation_size, depthImage.cols, depthImage.rows);
+	cv::copyMakeBorder(depthImage, depthCopy, dilation_size, dilation_size, dilation_size, dilation_size, cv::BORDER_REFLECT);
+
 	int dilation_type = cv::MORPH_RECT;
 	int element_size = dilation_size * 2 + 1;
 	cv::Mat element = cv::getStructuringElement(
@@ -101,8 +106,6 @@ void Dilation(int, void*)
 	
 	
 	//blur zero pixel areas
-	//TODO: blur until no zero pixels
-	firstBlackPixelThresh.copyTo(blackPixelsThreshold);
 	for (int i = 0; i < std::max(dilation_iterations, 1); i++)
 	{
 		blackPixelsThreshold = NULL;
@@ -110,13 +113,18 @@ void Dilation(int, void*)
 		dilationDst = NULL;
 		tempDepthImg = NULL;
 		maskInv = NULL;
-		cv::medianBlur(depthCopy, dilationDst, element_size);
+
 		cv::threshold(depthCopy, blackPixelsThreshold, threshVal, 255, cv::THRESH_BINARY_INV);
+		cv::Mat noBorderBlackPixels = blackPixelsThreshold(reverseBorder);
+		int blackPixelCount = cv::countNonZero(noBorderBlackPixels);
+		std::cout << "Zero Pixels:\t" << blackPixelCount << std::endl;
+		if (blackPixelCount == 0)
+			break;
+
+		cv::medianBlur(depthCopy, dilationDst, element_size);
 		cv::bitwise_not(blackPixelsThreshold, maskInv);
 		cv::bitwise_and(depthCopy, depthCopy, tempDepthImg, maskInv);
 		cv::add(tempDepthImg, dilationDst, depthCopy, blackPixelsThreshold);
-
-		std::cout << "Zero Pixels:\t" << cv::countNonZero(blackPixelsThreshold) << std::endl;
 	}
 	std::cout << "\n\n" << std::endl;
 
@@ -133,5 +141,5 @@ void Dilation(int, void*)
 	cv::add(tempDepthImg, dilationDst, depthCopy, firstBlackPixelThresh);
 
 
-	imshow("Dilation Demo", depthCopy);
+	imshow("Dilation Demo", depthCopy(reverseBorder));
 }
