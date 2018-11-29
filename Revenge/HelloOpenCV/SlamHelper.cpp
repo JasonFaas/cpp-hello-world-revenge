@@ -80,3 +80,16 @@ SlamHelper::blurGoodDataOverBad(cv::Mat depthImage)
 
 	return depthCopy;
 }
+
+cv::Mat
+SlamHelper::depthTo2D(cv::Mat depthImage)
+{
+	cv::Mat returnImg = cv::Mat(255, depthImage.cols, CV_8UC1, cv::Scalar(0));
+
+	int rowOfInterest = depthImage.rows / 2;
+	Concurrency::parallel_for(0, depthImage.cols, 1, [&](int n) {
+		returnImg.at<uchar>(depthImage.at<uchar>(rowOfInterest, n), n) = 255;
+	});
+
+	return returnImg;
+}

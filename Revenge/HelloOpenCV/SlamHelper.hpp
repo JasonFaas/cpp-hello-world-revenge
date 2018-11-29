@@ -11,6 +11,7 @@ class SlamHelper
 		SlamHelper();
 
 		cv::Mat blurGoodDataOverBad(cv::Mat depthImage);
+		cv::Mat depthTo2D(cv::Mat depthImage);
 	private:
 		cv::Mat depthImage, dilationDst, blackPixelsThreshold, medianBlackPixels, tempDepthImg, maskInv;
 

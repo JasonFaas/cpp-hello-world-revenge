@@ -24,12 +24,6 @@ int main() {
 	cv::namedWindow("depthImage");
 	cv::imshow("depthImage", depthImage);
 
-	cv::namedWindow("Dilation Demo");
-
-	// Display Total Pixel Info
-	totalNumberOfPixels = depthImage.rows * depthImage.cols;
-	std::cout << "Total Pixels:\t" << totalNumberOfPixels << std::endl;
-
 
 	//cv::createTrackbar("Iterations",
 	//	"Dilation Demo",
@@ -48,8 +42,14 @@ int main() {
 	//	Dilation);
 
 	SlamHelper* slamHelper = new SlamHelper();
+
 	cv::Mat depthBlurred = slamHelper->blurGoodDataOverBad(depthImage);
-	imshow("Dilation Demo", depthBlurred);
+	cv::namedWindow("Bad Data Blurred Out");
+	imshow("Bad Data Blurred Out", depthBlurred);
+
+	cv::Mat depthTo2d = slamHelper->depthTo2D(depthBlurred);
+	cv::namedWindow("Depth to 2D");
+	imshow("Depth to 2D", depthTo2d);
 	
 	cv::waitKey(0);
 
