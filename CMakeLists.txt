@@ -32,7 +32,7 @@ include_directories(Revenge "${Kinect_Main}/inc")
 include_directories(Revenge "${Sdl_Main}/include")
 #include_directories(Revenge "${OpenNI_Main}/Include")
 
-add_executable(Revenge Revenge/HelloOpenCV/FrameOperations.cpp)
+add_executable(Revenge Revenge/HelloOpenCV/FrameOperations.cpp Revenge/HelloOpenCV/SlamHelper.cpp)
 #add_executable(Revenge Revenge/HelloKinect/3DView/main.cpp)
 #add_executable(Revenge Revenge/HelloKinect/Vanilla/HelloKinectVanillaDepth.cpp)
 #add_executable(Revenge Revenge/HelloKinect/Vanilla/HelloKinectVanilla.cpp)
